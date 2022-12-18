@@ -1,0 +1,284 @@
+<html>
+<head>
+<title>SHAHIRA'S WEBSITE</title>
+<script type="text/javascript">
+// <![CDATA[
+var colour="#000000";
+var sparkles=120;
+
+/****************************
+*  Tinkerbell Magic Sparkle *
+* (c) 2005 mf2fm web-design *
+*  http://www.mf2fm.com/rv  *
+* DON'T EDIT BELOW THIS BOX *
+****************************/
+var x=ox=400;
+var y=oy=300;
+var swide=800;
+var shigh=600;
+var sleft=sdown=0;
+var tiny=new Array();
+var star=new Array();
+var starv=new Array();
+var starx=new Array();
+var stary=new Array();
+var tinyx=new Array();
+var tinyy=new Array();
+var tinyv=new Array();
+
+window.onload=function() { if (document.getElementById) {
+  var i, rats, rlef, rdow;
+  for (var i=0; i<sparkles; i++) {
+    var rats=createDiv(3, 3);
+    rats.style.visibility="hidden";
+    document.body.appendChild(tiny[i]=rats);
+    starv[i]=0;
+    tinyv[i]=0;
+    var rats=createDiv(5, 5);
+    rats.style.backgroundColor="transparent";
+    rats.style.visibility="hidden";
+    var rlef=createDiv(1, 5);
+    var rdow=createDiv(5, 1);
+    rats.appendChild(rlef);
+    rats.appendChild(rdow);
+    rlef.style.top="2px";
+    rlef.style.left="0px";
+    rdow.style.top="0px";
+    rdow.style.left="2px";
+    document.body.appendChild(star[i]=rats);
+  }
+  set_width();
+  sparkle();
+}}
+
+function sparkle() {
+  var c;
+  if (x!=ox || y!=oy) {
+    ox=x;
+    oy=y;
+    for (c=0; c<sparkles; c++) if (!starv[c]) {
+      star[c].style.left=(starx[c]=x)+"px";
+      star[c].style.top=(stary[c]=y)+"px";
+      star[c].style.clip="rect(0px, 5px, 5px, 0px)";
+      star[c].style.visibility="visible";
+      starv[c]=50;
+      break;
+    }
+  }
+  for (c=0; c<sparkles; c++) {
+    if (starv[c]) update_star(c);
+    if (tinyv[c]) update_tiny(c);
+  }
+  setTimeout("sparkle()", 40);
+}
+
+function update_star(i) {
+  if (--starv[i]==25) star[i].style.clip="rect(1px, 4px, 4px, 1px)";
+  if (starv[i]) {
+    stary[i]+=1+Math.random()*3;
+    if (stary[i]<shigh+sdown) {
+      star[i].style.top=stary[i]+"px";
+      starx[i]+=(i%5-2)/5;
+      star[i].style.left=starx[i]+"px";
+    }
+    else {
+      star[i].style.visibility="hidden";
+      starv[i]=0;
+      return;
+    }
+  }
+  else {
+    tinyv[i]=50;
+    tiny[i].style.top=(tinyy[i]=stary[i])+"px";
+    tiny[i].style.left=(tinyx[i]=starx[i])+"px";
+    tiny[i].style.width="2px";
+    tiny[i].style.height="2px";
+    star[i].style.visibility="hidden";
+    tiny[i].style.visibility="visible"
+  }
+}
+
+function update_tiny(i) {
+  if (--tinyv[i]==25) {
+    tiny[i].style.width="1px";
+    tiny[i].style.height="1px";
+  }
+  if (tinyv[i]) {
+    tinyy[i]+=1+Math.random()*3;
+    if (tinyy[i]<shigh+sdown) {
+      tiny[i].style.top=tinyy[i]+"px";
+      tinyx[i]+=(i%5-2)/5;
+      tiny[i].style.left=tinyx[i]+"px";
+    }
+    else {
+      tiny[i].style.visibility="hidden";
+      tinyv[i]=0;
+      return;
+    }
+  }
+  else tiny[i].style.visibility="hidden";
+}
+
+document.onmousemove=mouse;
+function mouse(e) {
+  set_scroll();
+  y=(e)?e.pageY:event.y+sdown;
+  x=(e)?e.pageX:event.x+sleft;
+}
+
+function set_scroll() {
+  if (typeof(self.pageYOffset)=="number") {
+    sdown=self.pageYOffset;
+    sleft=self.pageXOffset;
+  }
+  else if (document.body.scrollTop || document.body.scrollLeft) {
+    sdown=document.body.scrollTop;
+    sleft=document.body.scrollLeft;
+  }
+  else if (document.documentElement && (document.documentElement.scrollTop || document.documentElement.scrollLeft)) {
+    sleft=document.documentElement.scrollLeft;
+	sdown=document.documentElement.scrollTop;
+  }
+  else {
+    sdown=0;
+    sleft=0;
+  }
+}
+
+window.onresize=set_width;
+function set_width() {
+  if (typeof(self.innerWidth)=="number") {
+    swide=self.innerWidth;
+    shigh=self.innerHeight;
+  }
+  else if (document.documentElement && document.documentElement.clientWidth) {
+    swide=document.documentElement.clientWidth;
+    shigh=document.documentElement.clientHeight;
+  }
+  else if (document.body.clientWidth) {
+    swide=document.body.clientWidth;
+    shigh=document.body.clientHeight;
+  }
+}
+
+function createDiv(height, width) {
+  var div=document.createElement("div");
+  div.style.position="absolute";
+  div.style.height=height+"px";
+  div.style.width=width+"px";
+  div.style.overflow="hidden";
+  div.style.backgroundColor=colour;
+  return (div);
+}
+// ]]>
+</script>
+
+<style>
+body {
+  background-image: url("https://i.pinimg.com/236x/1f/91/7e/1f917e3bf25100b88eaad02c35f20ff1.jpg");
+}
+</style>
+
+<center>
+<br>
+<a href="index.html"><img src="imagempw/homebutton.png"></a>
+<a href="biodata.html"><img src="imagempw/biodatabutton.png"></a>
+<a href="education.html"><img src="imagempw/educationbutton.png"></a>
+<a href="family.html"><img src="imagempw/familybutton.png"></a>
+<a href="experience.html"><img src="imagempw/experiencebutton.png"></a>
+<a href="gallery.html"><img src="imagempw/gallerybutton.png"></a>
+<br>
+</center>
+
+<br>
+<marquee><center><h1>~MY EDUCATION FROM 7 YEARS OLD UNTIL 20 YEARS OLD~</h1></center></marquee>
+<br>
+<br>
+
+
+<center>
+<table border="3" cellpadding="15" cellspacing="15"align="center">
+   <tr>
+     <td bgcolor="#BFF579"><img src="imagempw/imageeducationinps1.jpg" width="280" height="250"></td>
+     <td bgcolor="#BFF579"><img src="imagempw/imageeducationinps2.jpg" width="200" height="270"></td>
+     <td bgcolor="#BFF579"><img src="imagempw/imageeducationinps3.png" width="280" height="250"></td>
+   </tr>
+   <tr>
+     <td colspan="3" bgcolor="pink"><center><font face="arial" size="4">
+     <ul type="circle" align="left"><li><b>SK KAMPUNG MAJU JAYA, JOHOR BAHRU</b></ul>
+
+I started my primary school session in 2009–2014. When I was in primary school, I held the position <p>
+prefect of SPBT, which was to look after the giving and returning of textbooks.Above is a photo<p>
+of me and my bestfriend getting our UPSR results in 2014. This relationship between me<p> 
+and my friend continued until high school because we attended the same school.  <p>
+we attended the same school as well.
+
+
+     </font></center></td>
+   </tr>
+
+
+</table>
+<br>
+<center><img src="imagempw/arrow1.gif" height="100"><img src="imagempw/arrow1.gif" height="100">
+<img src="imagempw/arrow1.gif" height="100"><img src="imagempw/arrow1.gif" height="100"><img src="imagempw/arrow1.gif" height="100">
+<img src="imagempw/arrow1.gif" height="100"></center>
+<br>
+</table>
+
+
+<table border="3" cellpadding="15" cellspacing="15"align="center">
+   <tr>
+     <td bgcolor="#F3F67C"><img src="imagempw/imageeducationinsc1.jpg" width="200" height="270"></td>
+     <td bgcolor="#F3F67C"><img src="imagempw/imageeducationinsc2.jpg" width="400" height="270"></td>
+     <td bgcolor="#F3F67C"><img src="imagempw/imageeducationinsc3.jpg" width="200" height="270"></td>
+   </tr>
+   <tr>
+     <td colspan="3" bgcolor="pink"><center><font face="arial" size="4">
+     <ul type="circle" align="left"><li><b>SMK IMPIAN EMAS, JOHOR BAHRU</b></ul>
+
+I studied at this school from 2015 to 2019. I go to school by bus and it takes about 30 minutes from<p> my home.
+During my time in secondary school, I was the school librarian prefect from  form 3<p> to form 5.
+I have 6 bestfriends namely Rohana, Rohani, Puteri, Amirah and Syakirah.<p>
+We were in the same class from form 1 to form 5.
+     
+     </font></center></td>
+     </tr>
+
+</table>
+<br>
+<center><img src="imagempw/arrow1.gif" height="100"><img src="imagempw/arrow1.gif" height="100">
+<img src="imagempw/arrow1.gif" height="100"><img src="imagempw/arrow1.gif" height="100"><img src="imagempw/arrow1.gif" height="100">
+<img src="imagempw/arrow1.gif" height="100"><img src="imagempw/arrow1.gif" height="100"><img src="imagempw/arrow1.gif" height="100"></center>
+<br>
+
+
+<table border="3" cellpadding="15" cellspacing="15">
+   <tr>
+     <td bgcolor="#87F5AA"><img src="imagempw/imageeducationinuniversity1.jpg" width="400" height="280"></td>
+     <td bgcolor="#87F5AA">
+<video controls width="200" height="300%">
+<source src="videompw/videoeducationinuniversity1.mp4" type="video/mp4">
+</video></td>
+     <td bgcolor="#87F5AA"><img src="imagempw/imageeducationinuniversity2.jpg" width="350" height="280"></td>
+   </tr>
+   <tr>
+     <td colspan="3" bgcolor="pink"><center><font face="arial" size="4">
+     <ul type="circle" align="left"><li><b>UNIVERSITI TEKNOLOGI MARA, MERBOK, KEDAH</b></ul>
+
+I started my highest education in 2020 until now at UITM, Sungai Petani, Kedah as a student Diploma in Library<p> 
+Management.During I studies at this university, I had learned how to be patient even though there are many<p>
+problems to deal with.I also learned how to solve my own problems and I started independently after I<p> 
+entered university. Besides that, I learned timely, sending assignments at a set time. The lastly,<p> 
+I have many good friends and always help me if I get stuck or need help and I have<p> 
+a very good and easy-to-approach lecturer if i need their help.
+
+     </font></center></td>
+   </tr>
+</table>
+</center>
+<br>
+<br>
+<center><a href="#top"><img src="imagempw/backtotop.png"</a></center>
+
+
